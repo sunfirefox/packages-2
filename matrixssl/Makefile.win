@@ -1,0 +1,67 @@
+#
+#	Build matrixssl on windows
+#
+
+# echo "  devenv matrixSsl.sln /rebuild Release /out build.log"
+# cd src ; devenv matrixSsl.sln /rebuild Release /out build.log ; cd ..
+
+all:
+	rm -f libmatrixssl.dll libmatrixssl.lib
+	mkdir -p Release ; \
+	cl /Ox /Ob1 /Os /Oy /I. /Imatrixssl /DPS_USE_FILE_SYSTEM /D MATRIX_USE_FILE_SYSTEM /D "WIN32" /D_USRDLL /D "_WIN32_WINNT=0x0510" /D "_WINDLL" /GF /FD /MD /Fo"Release/" /Fd"Release/vc70.pdb" /c /TC \
+	".\crypto\symmetric\aes.c" \
+	".\crypto\symmetric\arc4.c" \
+	".\crypto\symmetric\rc2.c" \
+	".\crypto\symmetric\des3.c" \
+	".\crypto\digest\hmac.c" \
+	".\crypto\digest\md5.c" \
+	".\crypto\keyformat\asn1.c" \
+	".\crypto\keyformat\base64.c" \
+	".\matrixssl\matrixssl.c" \
+	".\matrixssl\matrixsslApi.c" \
+	".\matrixssl\sslDecode.c" \
+	".\matrixssl\sslEncode.c" \
+	".\matrixssl\sslv3.c" \
+	".\matrixssl\tls.c" \
+	".\matrixssl\cipherSuite.c" \
+	".\crypto\prng\prng.c" \
+	".\crypto\prng\yarrow.c" \
+	".\crypto\pubkey\pkcs.c" \
+	".\crypto\pubkey\pubkey.c" \
+	".\crypto\pubkey\rsa.c" \
+	".\crypto\math\pstm.c" \
+	".\crypto\digest\sha1.c" \
+	".\crypto\keyformat\x509.c" \
+	".\core\corelib.c" \
+	".\core\win32\osdep.c"
+	path=`which cl` ; \
+	path=`cygpath -w "$$path"` ; \
+	path=`dirname "$$path"`/link ; \
+	"$$path" /debug /OUT:"Release/libmatrixssl.dll" /NOLOGO /dll /FILEALIGN:512  kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib msvcrt.lib \
+	".\Release\aes.obj" \
+	".\Release\arc4.obj" \
+	".\Release\rc2.obj" \
+	".\Release\des3.obj" \
+	".\Release\hmac.obj" \
+	".\Release\md5.obj" \
+	".\Release\asn1.obj" \
+	".\Release\base64.obj" \
+	".\Release\matrixssl.obj" \
+	".\Release\matrixsslApi.obj" \
+	".\Release\sslDecode.obj" \
+	".\Release\sslEncode.obj" \
+	".\Release\sslv3.obj" \
+	".\Release\tls.obj" \
+	".\Release\cipherSuite.obj" \
+	".\Release\prng.obj" \
+	".\Release\yarrow.obj" \
+	".\Release\pkcs.obj" \
+	".\Release\pubkey.obj" \
+	".\Release\rsa.obj" \
+	".\Release\pstm.obj" \
+	".\Release\sha1.obj" \
+	".\Release\x509.obj" \
+	".\Release\corelib.obj" \
+	".\Release\osdep.obj"
+
+#	mt /nologo /manifest Release\\libmatrixssl.dll.manifest '/outputresource:Release\\libmatrixssl.dll;#2'
