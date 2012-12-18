@@ -2,7 +2,7 @@
 #	Makefile for PHP
 #
 
-LATEST		:= php-5.3.19
+LATEST		:= php-5.4.9
 BLD_OS      := $(shell ../getos)
 BLD_ARCH    := $(shell ../getarch)
 
