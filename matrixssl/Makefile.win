@@ -19,6 +19,8 @@ all:
 	".\crypto\keyformat\base64.c" \
 	".\matrixssl\matrixssl.c" \
 	".\matrixssl\matrixsslApi.c" \
+	".\matrixssl\nativeCrypto.c" \
+	".\matrixssl\nativeCrypto.c" \
 	".\matrixssl\sslDecode.c" \
 	".\matrixssl\sslEncode.c" \
 	".\matrixssl\sslv3.c" \
@@ -48,6 +50,7 @@ all:
 	".\Release\base64.obj" \
 	".\Release\matrixssl.obj" \
 	".\Release\matrixsslApi.obj" \
+	".\Release\nativeCrypto.obj" \
 	".\Release\sslDecode.obj" \
 	".\Release\sslEncode.obj" \
 	".\Release\sslv3.obj" \
