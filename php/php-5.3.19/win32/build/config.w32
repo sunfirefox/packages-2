@@ -162,11 +162,9 @@ if (VCVERS >= 1500 && PHP_MP != 'disable') {
 		}
 }
 
-// EMBEDTHIS REMOVE version
-DEFINE("LDFLAGS", "/nologo ")
 // General link flags
-//  DEFINE("LDFLAGS", "/nologo /version:" +
-//	PHP_VERSION + "." + PHP_MINOR_VERSION + "." + PHP_RELEASE_VERSION);
+DEFINE("LDFLAGS", "/nologo /version:" +
+	PHP_VERSION + "." + PHP_MINOR_VERSION + "." + PHP_RELEASE_VERSION);
 
 // General DLL link flags
 DEFINE("DLL_LDFLAGS", "/dll ");
@@ -410,11 +408,10 @@ if (PHP_DSP != "no") {
 	FSO.CreateFolder("tmp");
 }
 
-//  EMBEDTHIS REMOVE
-//  ARG_ENABLE("security-flags", "Enable the compiler security flags", "no");
-//  if (PHP_SECURITY_FLAGS == "yes") {
-//	    ADD_FLAG("LDFLAGS", "/NXCOMPAT /DYNAMICBASE ");
-//  }
+ARG_ENABLE("security-flags", "Enable the compiler security flags", "no");
+if (PHP_SECURITY_FLAGS == "yes") {
+	ADD_FLAG("LDFLAGS", "/NXCOMPAT /DYNAMICBASE ");
+}
 
 ARG_ENABLE("static-analyze", "Enable the VC compiler static analyze", "no");
 if (PHP_STATIC_ANALYZE == "yes") {
