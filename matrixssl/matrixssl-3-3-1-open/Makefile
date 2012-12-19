@@ -58,10 +58,10 @@ SSL_OBJECTS = \
 # This is set by the debug target below
 #
 ifdef PS_DEBUG
-  DFLAGS	= -g -Wall -Winline -Wdisabled-optimization -DDEBUG
+  DFLAGS	= -g -Wall -Winline -Wdisabled-optimization -DDEBUG -DMATRIX_USE_FILE_SYSTEM
   STRIP	= test
 else
-  DFLAGS	= -Os -fomit-frame-pointer
+  DFLAGS	= -Os -fomit-frame-pointer -DMATRIX_USE_FILE_SYSTEM
 endif
 
 ifdef PS_PROFILE
