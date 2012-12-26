@@ -52,3 +52,4 @@ echo
 echo INCLUDE $INCLUDE 
 echo
 echo PATH $PATH 
+echo
