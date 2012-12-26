@@ -2,10 +2,13 @@
 #	Makefile for PHP
 #
 
-# LATEST		:= php-5.4.10
-LATEST		:= php-5.3.20
 BLD_OS      := $(shell ../getos)
 BLD_ARCH    := $(shell ../getarch)
+ifeq ($(BLD_OS),WIN)
+	LATEST	:= php-5.4.10
+else
+	LATEST	:= php-5.3.20
+endif
 
 OPTIONS		:= 	--disable-debug --disable-rpath --disable-cli --enable-bcmath --enable-calendar \
 			   	--enable-maintainer-zts --enable-embed=shared --enable-ftp \
