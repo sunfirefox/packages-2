@@ -181,8 +181,11 @@ if (VCVERS >= 1500 && PHP_MP != 'disable') {
 }
 
 // General link flags
+/* EMBEDTHIS
 DEFINE("LDFLAGS", "/nologo /version:" +
 	PHP_VERSION + "." + PHP_MINOR_VERSION + "." + PHP_RELEASE_VERSION);
+*/
+DEFINE("LDFLAGS", "/nologo");
 
 // General DLL link flags
 DEFINE("DLL_LDFLAGS", "/dll ");
@@ -435,9 +438,11 @@ if (PHP_DSP != "no") {
 }
 
 ARG_ENABLE("security-flags", "Disable the compiler security flags", "yes");
+/* EMBEDTHIS 
 if (PHP_SECURITY_FLAGS == "yes") {
 	ADD_FLAG("LDFLAGS", "/NXCOMPAT /DYNAMICBASE ");
 }
+*/
 
 ARG_ENABLE("static-analyze", "Enable the VC compiler static analyze", "no");
 if (PHP_STATIC_ANALYZE == "yes") {
