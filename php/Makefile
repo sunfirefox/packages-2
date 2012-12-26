@@ -2,16 +2,15 @@
 #	Makefile for PHP
 #
 
-LATEST		:= php-5.4.9
+# LATEST		:= php-5.4.10
+LATEST		:= php-5.3.20
 BLD_OS      := $(shell ../getos)
 BLD_ARCH    := $(shell ../getarch)
 
 OPTIONS		:= 	--disable-debug --disable-rpath --disable-cli --enable-bcmath --enable-calendar \
 			   	--enable-maintainer-zts --enable-embed=shared --enable-ftp \
-			   	--enable-inline-optimization --enable-magic-quotes --enable-safe-mode \
-			   	--enable-sockets --enable-wddx --sysconfdir=/etc/appweb \
-			   	--with-pic --with-exec-dir=/etc/appweb/exec --with-regex=system --with-pear \
-			   	--with-xmlrpc --with-zlib
+			   	--enable-inline-optimization --enable-sockets --enable-wddx --sysconfdir=/etc/appweb \
+			   	--with-pic --with-regex=system --with-pear --with-xmlrpc --with-zlib
 WIN_OPTIONS	:= 	--disable-debug --without-gd --disable-bcmath --disable-calendar --disable-com-dotnet --disable-filter \
 			   	--disable-json --disable-ipv6 --disable-odbc --disable-tokenizer \
 			   	--disable-zlib --disable-ftp --enable-embed --enable-zts --without-dom --without-libxml \
@@ -40,11 +39,12 @@ ifeq ($(BLD_OS),MACOSX)
     else \
         GCC_ARCH="i686" ; \
     fi ; \
+	CC=/usr/bin/gcc; \
 	CCFLAGS="-arch $${GCC_ARCH}" ; \
 	CCFLAGS="$CFLAGS" ; \
 	LDFLAGS="-Wl,-install_name,@rpath/libphp5.dylib -arch $${GCC_ARCH} -bind_at_load -lresolv" ; \
-	export LDFLAGS CFLAGS CCFLAGS MACOSX_DEPLOYMENT_TARGET ; \
-	cd latest ; ./configure --host=$${GCC_ARCH}-apple-darwin10.0.0 $(OPTIONS) $(MORE_OPTIONS); \
+	export CC LDFLAGS CFLAGS CCFLAGS MACOSX_DEPLOYMENT_TARGET ; \
+	cd latest ; ./configure --build=$${GCC_ARCH}-apple-darwin10.0.0 $(OPTIONS) $(MORE_OPTIONS); \
 	cp Makefile Makefile.new ; \
 	sed 's/EXTRA_LDFLAGS = -avoid-version -module/EXTRA_LDFLAGS = -avoid-version/' < Makefile.new > Makefile ; \
 	make clean ; make
