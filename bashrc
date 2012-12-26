@@ -39,6 +39,10 @@ unalias mc 2>/dev/null
 echo
 type cl
 type link
+echo
 echo LIB $LIB 
+echo
 echo INCLUDE $INCLUDE 
+echo
 echo PATH $PATH 
+echo
