@@ -87,6 +87,7 @@ SHARED	= -shared
 CFLAGS  = $(DFLAGS) -fPIC -D$(OSDEP) -I./ -I../
 LDFLAGS += -lc
 
+
 ifeq ($(shell uname),Darwin)
   #
   # Override variables for compilation on Mac OS X (Darwin)
@@ -95,6 +96,8 @@ ifeq ($(shell uname),Darwin)
   SO = .dylib
   SHARED = -dynamiclib
   CFLAGS += -isystem -I/usr/include
+  LDFLAGS += -install_name @rpath/$(SSL_DYN)
+
   #
   # Use the compiler default to figure out 32 or 64 bit mode
   #
