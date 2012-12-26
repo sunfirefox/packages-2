@@ -4,12 +4,7 @@
 
 BLD_OS      := $(shell ../getos)
 BLD_ARCH    := $(shell ../getarch)
-ifeq ($(BLD_OS),WIN)
-	LATEST	:= php-5.4.10
-else
-	LATEST	:= php-5.3.20
-endif
-
+LATEST	    := php-5.4.10
 OPTIONS		:= 	--disable-debug --disable-rpath --disable-cli --enable-bcmath --enable-calendar \
 			   	--enable-maintainer-zts --enable-embed=shared --enable-ftp \
 			   	--enable-inline-optimization --enable-sockets --enable-wddx --sysconfdir=/etc/appweb \
