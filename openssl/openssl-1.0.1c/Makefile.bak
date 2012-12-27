@@ -11,11 +11,11 @@ SHLIB_VERSION_NUMBER=1.0.0
 SHLIB_VERSION_HISTORY=
 SHLIB_MAJOR=1
 SHLIB_MINOR=0.0
-SHLIB_EXT=.$(SHLIB_MAJOR).$(SHLIB_MINOR).dylib
-PLATFORM=darwin64-x86_64-cc
-OPTIONS=enable-shared no-ec_nistp_64_gcc_128 no-gmp no-jpake no-krb5 no-md2 no-rc5 no-rfc3779 no-sctp no-store no-zlib no-zlib-dynamic no-static-engine
-CONFIGURE_ARGS=darwin64-x86_64-cc shared
-SHLIB_TARGET=darwin-shared
+SHLIB_EXT=
+PLATFORM=VC-WIN64A
+OPTIONS= no-ec_nistp_64_gcc_128 no-gmp no-jpake no-krb5 no-md2 no-rc5 no-rfc3779 no-sctp no-shared no-store no-zlib no-zlib-dynamic
+CONFIGURE_ARGS=VC-WIN64A
+SHLIB_TARGET=
 
 # HERE indicates where this Makefile lives.  This can be used to indicate
 # where sub-Makefiles are expected to be.  Currently has very limited usage,
@@ -59,17 +59,17 @@ OPENSSLDIR=/usr/local/ssl
 # equal 4.
 # PKCS1_CHECK - pkcs1 tests.
 
-CC= cc
-CFLAG= -fPIC -fno-common -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -arch x86_64 -O3 -DL_ENDIAN -Wall -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
+CC= cl
+CFLAG= -DOPENSSL_THREADS  -DDSO_WIN32 -W3 -Gs0 -Gy -nologo -DOPENSSL_SYSNAME_WIN32 -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -DUNICODE -D_UNICODE -D_CRT_SECURE_NO_DEPRECATE -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_MONT5 -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DAES_ASM -DVPAES_ASM -DBSAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM
 DEPFLAG= -DOPENSSL_NO_EC_NISTP_64_GCC_128 -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_MD2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_SCTP -DOPENSSL_NO_STORE
-PEX_LIBS= -Wl,-search_paths_first
+PEX_LIBS= 
 EX_LIBS= 
 EXE_EXT= 
 ARFLAGS= 
 AR= ar $(ARFLAGS) r
-RANLIB= /usr/bin/ranlib
+RANLIB= /cygdrive/C/bin/ranlib
 NM= nm
-PERL= /usr/bin/perl
+PERL= /cygdrive/C/bin/perl
 TAR= tar
 TARFLAGS= --no-recursion
 MAKEDEPPROG=makedepend
@@ -89,12 +89,12 @@ PROCESSOR=
 
 # CPUID module collects small commonly used assembler snippets
 CPUID_OBJ= x86_64cpuid.o
-BN_ASM= x86_64-gcc.o x86_64-mont.o x86_64-mont5.o x86_64-gf2m.o modexp512-x86_64.o
+BN_ASM= bn_asm.o x86_64-mont.o x86_64-mont5.o x86_64-gf2m.o modexp512-x86_64.o
 DES_ENC= des_enc.o fcrypt_b.o
 AES_ENC= aes-x86_64.o vpaes-x86_64.o bsaes-x86_64.o aesni-x86_64.o aesni-sha1-x86_64.o
 BF_ENC= bf_enc.o
 CAST_ENC= c_enc.o
-RC4_ENC= rc4_enc.o rc4_skey.o
+RC4_ENC= rc4-x86_64.o rc4-md5-x86_64.o
 RC5_ENC= rc5_enc.o
 MD5_ASM_OBJ= md5-x86_64.o
 SHA1_ASM_OBJ= sha1-x86_64.o sha256-x86_64.o sha512-x86_64.o
@@ -103,7 +103,7 @@ WP_ASM_OBJ= wp-x86_64.o
 CMLL_ENC= cmll-x86_64.o cmll_misc.o
 MODES_ASM_OBJ= ghash-x86_64.o
 ENGINES_ASM_OBJ= 
-PERLASM_SCHEME= macosx
+PERLASM_SCHEME= auto
 
 # KRB5 stuff
 KRB5_INCLUDES=
@@ -174,9 +174,9 @@ WDIRS=  windows
 LIBS=   libcrypto.a libssl.a
 SHARED_CRYPTO=libcrypto$(SHLIB_EXT)
 SHARED_SSL=libssl$(SHLIB_EXT)
-SHARED_LIBS=$(SHARED_CRYPTO) $(SHARED_SSL)
-SHARED_LIBS_LINK_EXTS=.$(SHLIB_MAJOR).dylib .dylib
-SHARED_LDFLAGS=-arch x86_64 -dynamiclib
+SHARED_LIBS=
+SHARED_LIBS_LINK_EXTS=
+SHARED_LDFLAGS=
 
 GENERAL=        Makefile
 BASENAME=       openssl
