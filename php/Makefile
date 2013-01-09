@@ -8,7 +8,7 @@ LATEST	    := php-5.4.10
 OPTIONS		:= 	--disable-debug --disable-rpath --disable-cli --enable-bcmath --enable-calendar \
 			   	--enable-maintainer-zts --enable-embed=shared --enable-ftp \
 			   	--enable-inline-optimization --enable-sockets --enable-wddx --sysconfdir=/etc/appweb \
-			   	--with-pic --with-regex=system --with-pear --with-xmlrpc --with-zlib
+			   	--with-pic --with-regex=system --with-pear --with-xmlrpc --with-zlib --with-curl
 WIN_OPTIONS	:= 	--disable-debug --without-gd --disable-bcmath --disable-calendar --disable-com-dotnet --disable-filter \
 			   	--disable-json --disable-ipv6 --disable-odbc --disable-tokenizer \
 			   	--disable-zlib --disable-ftp --enable-embed --enable-zts --without-dom --without-libxml \
@@ -56,6 +56,9 @@ clean:
 
 prep:
 	apt-get install libxml2-dev curl libdb-dev libz-dev
+	apt-get install php5-curl 
+    apt-get install libcurl4-openssl-dev
+	# apt-get install libcurl3 libcurl3-dev
 
 #
 #	Mac 32 bit build
